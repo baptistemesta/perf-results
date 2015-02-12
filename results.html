@@ -3,13 +3,53 @@
 <head lang="en">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/rickshaw.min.css">
+    <script src="js/bootstrap.min.js" charset="utf-8"></script>
+    <script src="js/d3.min.js" charset="utf-8"></script>
+
+    <!-- 1. Load platform support before any code that touches the DOM. -->
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <script src="bower_components/rickshaw/rickshaw.min.js"></script>
+    <!-- 2. Load the component using an HTML Import -->
+    <link rel="import" href="elements/perf-chart.html">
     <meta charset="UTF-8">
     <title>Performance test results</title>
 </head>
 <body>
-<script src="js/d3.min.js" charset="utf-8"></script>
-<script src="js/bootstrap.min.js" charset="utf-8"></script>
-<script src="js/rickshaw.min.js" charset="utf-8"></script>
+<div id="chart"></div>
+<script>
 
+    // set up our data series with 50 random data points
+
+    var seriesData = [ [], [], [] ];
+    var random = new Rickshaw.Fixtures.RandomData(150);
+
+    for (var i = 0; i < 70; i++) {
+        random.addData(seriesData);
+    }
+
+    // instantiate our graph!
+
+    var graph = new Rickshaw.Graph( {
+        element: document.getElementById("chart"),
+        width: 400,
+        height: 100,
+        renderer: 'bar',
+        series: [
+            {
+                color: "#c05020",
+                data: seriesData[0],
+            }, {
+                color: "#30c020",
+                data: seriesData[1],
+            }, {
+                color: "#6060c0",
+                data: seriesData[2],
+            }
+        ]
+    } );
+
+    graph.render();
+
+</script>
 </body>
 </html>
