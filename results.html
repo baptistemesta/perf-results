@@ -15,41 +15,39 @@
     <title>Performance test results</title>
 </head>
 <body>
+<perf-chart></perf-chart>
 <div id="chart"></div>
 <script>
-
-    // set up our data series with 50 random data points
-
-    var seriesData = [ [], [], [] ];
-    var random = new Rickshaw.Fixtures.RandomData(150);
-
-    for (var i = 0; i < 70; i++) {
-        random.addData(seriesData);
-    }
-
-    // instantiate our graph!
-
-    var graph = new Rickshaw.Graph( {
-        element: document.getElementById("chart"),
-        width: 400,
-        height: 100,
-        renderer: 'bar',
+    $scope.options = {
         series: [
             {
-                color: "#c05020",
-                data: seriesData[0],
-            }, {
-                color: "#30c020",
-                data: seriesData[1],
-            }, {
-                color: "#6060c0",
-                data: seriesData[2],
+                y: "val_1",
+                axis: "y",
+                color: "#1f77b4",
+                type: "column",
+                id: "series_1",
+                label: "launch1"
+            },
+            {
+                y: "val_0",
+                label: "launch2",
+                color: "#2ca02c",
+                type: "column",
+                axis: "y",
+                id: "series_0"
             }
-        ]
-    } );
-
-    graph.render();
-
+        ],
+        stacks: [],
+        axes: {x: {type: "linear", key: "x"}, y: {type: "linear"}},
+        lineMode: "linear",
+        tension: 0.7,
+        tooltip: {mode: "scrubber"},
+        drawLegend: true,
+        drawDots: true,
+        columnsHGap: 5
+    };
 </script>
+<perf-chart></perf-chart>
+<perf-chart></perf-chart>
 </body>
 </html>
